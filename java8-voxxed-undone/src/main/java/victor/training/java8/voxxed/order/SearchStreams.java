@@ -7,21 +7,14 @@ import java.util.List;
 
 import victor.training.java8.voxxed.order.entity.Customer;
 import victor.training.java8.voxxed.order.entity.Order;
+import victor.training.java8.voxxed.order.entity.Order.Status;
 
 public class SearchStreams {
 	
-	/**
-	 * FIRST OF ALL: Add the following "Favourite" static imports:
-	 * Eclipse: Window > Preferences > type "Favo" > Favorites >
-	 * 					> New Type > Browse > and type the class name for:
-		java.util.stream.Collectors
-	 */
-	
-	/**
-	 * - shorten/clean it up
-	 */
-	public List<Order> p1_getActiveOrders(Customer customer) {	
-		return customer.getOrders().stream().collect(toList()); 
+	public List<Order> p1_getActiveOrders(Customer customer) {
+		return customer.getOrders().stream()
+				.filter(order -> order.getStatus() == Status.ACTIVE)
+				.collect(toList());
 	}
 	
 	/**
