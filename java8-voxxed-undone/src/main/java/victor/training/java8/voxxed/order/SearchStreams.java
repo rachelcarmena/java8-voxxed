@@ -3,6 +3,7 @@ package victor.training.java8.voxxed.order;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import java.util.Optional;
 
 import victor.training.java8.voxxed.order.entity.Customer;
 import victor.training.java8.voxxed.order.entity.Order;
@@ -15,13 +16,8 @@ public class SearchStreams {
 				.collect(toList());
 	}
 
-	/**
-	 * @return the Order in the list with the given id  
-	 * - ...Any or ...First ?
-	 * - what do you do when you don't find it ? null/throw/Optional ?
-	 */
 	public Order p2_getOrderById(List<Order> orders, long orderId) {
-		return null; // orders.stream()
+		return orders.stream().filter(order -> order.getId().equals(orderId)).findFirst().orElse(new Order());
 	}
 	
 	/**
