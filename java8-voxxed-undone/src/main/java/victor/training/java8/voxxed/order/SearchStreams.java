@@ -1,5 +1,6 @@
 package victor.training.java8.voxxed.order;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 import java.time.LocalDate;
@@ -36,25 +37,17 @@ public class SearchStreams {
 				.noneMatch(OrderLine::isSpecialOffer);
 	}
 	
-	// ---------- select the best ------------
-	
-	/**
-	 * The Order with maximum getTotalPrice. 
-	 * i.e. the most expensive Order, or null if no Orders
-	 * - Challenge: return an Optional<creationDate>
-	 */
 	public Optional<LocalDate> p5_getMaxPriceOrder(Customer customer) {
 		return customer.getOrders().stream()
-				.max(Comparator.comparing(Order::getTotalPrice))
+				.max(comparing(Order::getTotalPrice))
 				.map(Order::getCreationDate);
 	}
 	
-	/**
-	 * last 3 Orders sorted descending by creationDate
-	 */
 	public List<Order> p6_getLast3Orders(Customer customer) {
-		return null; 
+		Comparator<Order> descendingCreationDate = comparing(Order::getCreationDate).reversed();
+		return customer.getOrders().stream()
+				.sorted(descendingCreationDate)
+				.limit(3)
+				.collect(toList());
 	}
-	
-	
 }
