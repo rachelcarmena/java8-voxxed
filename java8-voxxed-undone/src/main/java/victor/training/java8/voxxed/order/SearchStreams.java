@@ -17,7 +17,10 @@ public class SearchStreams {
 	}
 
 	public Order p2_getOrderById(List<Order> orders, long orderId) {
-		return orders.stream().filter(order -> order.getId().equals(orderId)).findFirst().orElse(new Order());
+		return orders.stream()
+				.filter(order -> order.getId().equals(orderId))
+				.findFirst()
+				.orElse(new Order());
 	}
 	
 	/**
