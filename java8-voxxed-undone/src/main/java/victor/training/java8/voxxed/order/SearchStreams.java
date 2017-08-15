@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import victor.training.java8.voxxed.order.entity.Customer;
 import victor.training.java8.voxxed.order.entity.Order;
+import victor.training.java8.voxxed.order.entity.OrderLine;
 
 public class SearchStreams {
 	
@@ -28,12 +29,9 @@ public class SearchStreams {
 				.anyMatch(Order::isActive);
 	}
 
-	/**
-	 * An Order can be returned if it doesn't contain 
-	 * any OrderLine with isSpecialOffer()==true
-	 */
 	public boolean p4_canBeReturned(Order order) {
-		return true; // order.getOrderLines().stream() 
+		return order.getOrderLines().stream()
+				.noneMatch(OrderLine::isSpecialOffer);
 	}
 	
 	// ---------- select the best ------------
