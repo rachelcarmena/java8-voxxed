@@ -2,21 +2,19 @@ package victor.training.java8.voxxed.order;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.Comparator;
 import java.util.List;
 
 import victor.training.java8.voxxed.order.entity.Customer;
 import victor.training.java8.voxxed.order.entity.Order;
-import victor.training.java8.voxxed.order.entity.Order.Status;
 
 public class SearchStreams {
 	
 	public List<Order> p1_getActiveOrders(Customer customer) {
 		return customer.getOrders().stream()
-				.filter(order -> order.getStatus() == Status.ACTIVE)
+				.filter(Order::isActive)
 				.collect(toList());
 	}
-	
+
 	/**
 	 * @return the Order in the list with the given id  
 	 * - ...Any or ...First ?
